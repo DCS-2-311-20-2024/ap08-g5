@@ -78,6 +78,11 @@ export function init(scene, size, id, offset, texture) {
     makeBuilding(50,-10,1);
     makeBuilding(30,-40,2);
     makeBuilding(80,-40,3);
+    makeBuilding(80,-30,4);
+    makeBuilding(40,-30,4);
+    makeBuilding(70,-60,3);
+    makeBuilding(20,-70,2);
+    makeBuilding(50,-74,3);
     // コース(描画)
     //制御点を補間して曲線を作る
     course = new THREE.CatmullRomCurve3(
