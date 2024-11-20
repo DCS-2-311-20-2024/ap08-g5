@@ -19,8 +19,8 @@ let course;
 export const origin = new THREE.Vector3();
 export const controlPoints = [
     [ 25, 40],
-    [10,0],
-    [-20,20],
+    [10,-10],
+    [-20,-20],
     [-50,-20]
 ]
 export function init(scene, size, id, offset, texture) {
@@ -48,7 +48,36 @@ export function init(scene, size, id, offset, texture) {
     scene.add(plane);
 
     // ビル
-
+    function makeBuilding(x, z, type) {
+        const height = [2, 2, 7, 4, 5];
+        const bldgH = height[type]*5;
+        const geometry = new THREE.BoxGeometry(8, bldgH, 8);
+        const material = new THREE.MeshLambertMaterial({map: texture});
+        const sideUvS = (type*2+1)/11;
+        const sideUvE = (type*2+2)/11;
+        const topUvs = (type*2+2)/11;
+        const topUve = (type*2+3)/11;
+        const uvs = geometry.getAttribute("uv");
+        for(let i = 0; i < 48; i+=4){
+            if(i < 16 || i > 22){
+                uvs.array[i] = sideUvS;
+                uvs.array[i+2] = sideUvE;
+            }
+            else{
+                uvs.array[i] = topUvs;
+                uvs.array[i+2] = topUve;
+            }
+        }
+        const bldg = new THREE.Mesh(
+            geometry,
+            material
+        )
+        bldg.position.set(x,bldgH/2,z);
+        scene.add(bldg);
+    }
+    makeBuilding(50,-10,1);
+    makeBuilding(30,-40,2);
+    makeBuilding(80,-40,3);
     // コース(描画)
     //制御点を補間して曲線を作る
     course = new THREE.CatmullRomCurve3(
@@ -81,7 +110,22 @@ export function init(scene, size, id, offset, texture) {
 
 // コース(自動運転用)
 export function makeCourse(scene) {
-    
+    const courseVectors = [];
+    const parts = [L1, L2, L3, L4];
+    parts.forEach((part)=>{
+        part.controlPoints.forEach((p) =>{
+            courseVectors.push(
+                new THREE.Vector3(
+                    p[0] + part.origin.x,
+                    0,
+                    p[1] + part.origin.z
+                )
+            )
+        });
+    })
+    course = new THREE.CatmullRomCurve3(
+        courseVectors, true
+    )
 }
 
 // カメラを返す
