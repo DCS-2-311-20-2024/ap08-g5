@@ -48,7 +48,23 @@ export function init(scene, size, id, offset, texture) {
     scene.add(plane);
 
     // ビル
-
+    function makeBuilding(x,z,type){
+        const height = [2,2,7,4,5];
+        const bldgH = height[type]*5;
+        const geometry = new THREE.BoxGeometry(8, bldgH, 8);
+        const material = new THREE.MeshLambertMaterial({color: 0x808080});
+        const bldg = new THREE.Mesh(
+            geometry,
+            material
+        )
+        bldg.position.set(x,bldgH/2,z);
+        scene.add(bldg);
+    }
+    makeBuilding(50,40,2);
+    makeBuilding(59,40,0);
+    makeBuilding(50,49,1);
+    makeBuilding(82,40,4);
+    makeBuilding(82,50,3)
     // コース(描画)
     course = new THREE.CatmullRomCurve3(
         controlPoints.map((p)=> {
