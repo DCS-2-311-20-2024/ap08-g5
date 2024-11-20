@@ -1,7 +1,7 @@
 //
 // 応用プログラミング 第8回 (ap08L3.js)
 //
-// G18400-2021 拓殖太郎
+// G384382023 近藤　咲梧
 //
 
 "use strict"; // 厳格モード
@@ -62,6 +62,9 @@ export function getCamera() {
 
 // 車の設定
 export function setCar(scene, car) {
+    const SCALE=0.01;
+    car.position.copy(origin);
+    car.scale.set(SCALE,SCALE,SCALE);
 }
 
 // Windowサイズの変更処理
