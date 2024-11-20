@@ -50,7 +50,7 @@ export function init(scene, size, id, offset, texture) {
     // ビル
     function makeBuilding(x,z,type){
         const height=[2,2,7,4,5];
-        const bldgH=height[type]*5;
+        const bldgH=height[type]*10;
         const geometry=new THREE.BoxGeometry(8,bldgH,8);
         const material=new THREE.MeshLambertMaterial({map:texture});
         const sideUvS=(type*2+1)/11;
@@ -76,6 +76,9 @@ export function init(scene, size, id, offset, texture) {
     }
     makeBuilding(20,20,0);
     makeBuilding(-10,10,2);
+    makeBuilding(12,7,0);
+    makeBuilding(-20,12,1);
+    makeBuilding(24,15,0);
 
     // コース(描画)
     //制御点を補完して曲線を作る
