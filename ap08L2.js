@@ -55,8 +55,8 @@ export function init(scene, size, id, offset, texture) {
         const material = new THREE.MeshLambertMaterial({map: texture});
 
         const sideUvS = (type*2+1)/11;
-        const sideUvE = (type*2+1)/11;
-        const topUvS = (type*2+1)/11;
+        const sideUvE = (type*2+2)/11;
+        const topUvS = (type*2+2)/11;
         const topUvE = (type*2+3)/11;
         const uvs = geometry.getAttribute("uv");
         for (let i=0; i< 48; i+=4){
@@ -74,10 +74,11 @@ export function init(scene, size, id, offset, texture) {
             geometry,
             material
         )
-        bldg.position.set(40,bldgH,50);
+        bldg.position.set(-30,bldgH,20);
         scene.add(bldg);
     }
     makeBuilding(20, 20, 0);
+    //makeBuilding(-10, 10, 2);
 
     // コース(描画)
     course = new THREE.CatmullRomCurve3(
