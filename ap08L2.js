@@ -75,7 +75,14 @@ export function init(scene, size, id, offset, texture) {
             material
         )
         bldg.position.set(-30,bldgH,20);
-        scene.add(bldg);
+
+        const bldg2 = new THREE.Mesh(
+            geometry,
+            material
+        )
+        bldg2.position.set(-55,bldgH,50);
+
+        scene.add(bldg,bldg2);
     }
     makeBuilding(20, 20, 0);
     //makeBuilding(-10, 10, 2);
